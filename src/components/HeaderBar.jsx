@@ -55,11 +55,6 @@ export default function HeaderBar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/cart" aria-current="page">
-            Cart
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
           <Link href="/dashboard" aria-current="page">
             Dashborad
           </Link>
