@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //蛋糕的初始數量
 const initialState = {
-    cakeCount: 0
+    cakeName: '蛋糕',
+    cakeCount: 10
 }
 
 //蛋糕的reducer
@@ -26,6 +27,7 @@ const cakeSlice = createSlice({
         },
         //新增
         addCake: (state, action) => {
+            alert(`購買成功 ${state.cakeName}數量，增加${action.payload.qty}個, 總數量: ${state.cakeCount + action.payload.qty}`);
             state.cakeCount += action.payload.qty;
             return state;
         }

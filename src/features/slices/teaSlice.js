@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 //蛋糕的初始數量
 const initialState = {
+    teaName: '茶',
     teaCount: 10
 }
 

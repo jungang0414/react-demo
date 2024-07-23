@@ -12,14 +12,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { buyCake } from "../features/slices/cakeSlice";
 import { buyTea } from "../features/slices/teaSlice";
 import { buyCoffee } from "../features/slices/coffeeSlice";
-
+import { addIncart } from "../features/slices/incartSlice";
 import { useRef } from "react";
 
 export default function Product() {
   //取出redux的資料
   const cakeCount = useSelector((state) => state.cake.cakeCount);
+  const cakeName = useSelector((state) => state.cake.cakeName);
   const teaCount = useSelector((state) => state.tea.teaCount);
+  const teaName = useSelector((state) => state.tea.teaName);
   const coffeeCount = useSelector((state) => state.coffee.coffeeCount);
+  const coffeeName = useSelector((state) => state.coffee.coffeeName);
   const dispatch = useDispatch();
 
   //購買商品
@@ -48,6 +51,53 @@ export default function Product() {
     dispatch(buyCoffee(send));
   };
 
+  //加入購物車函數
+  const addCakeToCart = () => {
+    if (buyCakeQtyRef.current.value === "") {
+      alert("請輸入數量");
+      return;
+    }
+    if (cakeCount < buyCakeQtyRef.current.value) {
+      alert("數量不足");
+      return;
+    }
+    const newItem = {
+      name: cakeName,
+      count: buyCakeQtyRef.current.value,
+      price: 100,
+    };
+    alert(`${newItem.name} 已加入購物車, 數量: ${newItem.count}`);
+    dispatch(addIncart(newItem));
+  };
+
+  const addTeaToCart = () => {
+    if (buyTeaQtyRef.current.value === "") {
+      alert("請輸入數量");
+      return;
+    }
+    const newItem = {
+      name: teaName,
+      count: buyTeaQtyRef.current.value,
+      price: 50,
+    };
+    alert(`${newItem.name} 已加入購物車, 數量: ${newItem.count}`);
+    dispatch(addIncart(newItem));
+  };
+
+  const addCoffeeToCart = () => {
+    if (buyCoffeeQtyRef.current.value === "") {
+      alert("請輸入數量");
+      return;
+    }
+    const newItem = {
+      name: coffeeName,
+      count: buyCoffeeQtyRef.current.value,
+      price: 80,
+    };
+    alert(`${newItem.name} 已加入購物車, 數量: ${newItem.count}`);
+    dispatch(addIncart(newItem));
+  };
+
   return (
     <Table aria-label="Example static collection table">
       <TableHeader>
@@ -55,11 +105,12 @@ export default function Product() {
         <TableColumn>單價</TableColumn>
         <TableColumn>剩餘數量</TableColumn>
         <TableColumn>購買數量</TableColumn>
-        <TableColumn>操作</TableColumn>
+        <TableColumn>操作1</TableColumn>
+        <TableColumn>操作2</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow key="1">
-          <TableCell>蛋糕</TableCell>
+          <TableCell>{cakeName}</TableCell>
           <TableCell>100</TableCell>
           <TableCell>{cakeCount}</TableCell>
           <TableCell>
@@ -71,11 +122,14 @@ export default function Product() {
             />
           </TableCell>
           <TableCell>
-            <button onClick={byCakeOrder}>確認</button>
+            <button onClick={addCakeToCart}>加入購物車</button>
+          </TableCell>
+          <TableCell>
+            <button onClick={byCakeOrder}>直接購買</button>
           </TableCell>
         </TableRow>
         <TableRow key="2">
-          <TableCell>茶</TableCell>
+          <TableCell>{teaName}</TableCell>
           <TableCell>50</TableCell>
           <TableCell>{teaCount}</TableCell>
           <TableCell>
@@ -87,11 +141,14 @@ export default function Product() {
             />
           </TableCell>
           <TableCell>
-            <button onClick={byTeaOrder}>確認</button>
+            <button onClick={addTeaToCart}>加入購物車</button>
+          </TableCell>
+          <TableCell>
+            <button onClick={byTeaOrder}>直接購買</button>
           </TableCell>
         </TableRow>
         <TableRow key="3">
-          <TableCell>咖啡</TableCell>
+          <TableCell>{coffeeName}</TableCell>
           <TableCell>80</TableCell>
           <TableCell>{coffeeCount}</TableCell>
           <TableCell>
@@ -103,7 +160,10 @@ export default function Product() {
             />
           </TableCell>
           <TableCell>
-            <button onClick={byCoffeeOrder}>確認</button>
+            <button onClick={addCoffeeToCart}>加入購物車</button>
+          </TableCell>
+          <TableCell>
+            <button onClick={byCoffeeOrder}>直接購買</button>
           </TableCell>
         </TableRow>
       </TableBody>

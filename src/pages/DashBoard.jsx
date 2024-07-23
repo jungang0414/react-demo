@@ -10,19 +10,24 @@ import { useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addCake } from "../features/slices/cakeSlice";
-// import { addTea } from "../features/slices/teaSlice";
-// import { addCoffee } from "../features/slices/coffeeSlice";
+import { addTea } from "../features/slices/teaSlice";
+import { addCoffee } from "../features/slices/coffeeSlice";
 
 export default function DashBoard() {
   const cakeCount = useSelector((state) => state.cake.cakeCount);
-  // const teaCount = useSelector((state) => state.tea.teaCount);
-  // const coffeeCount = useSelector((state) => state.coffee.coffeeCount);
+  const cakeName = useSelector((state) => state.cake.cakeName);
+
+  const teaCount = useSelector((state) => state.tea.teaCount);
+  const teaName = useSelector((state) => state.tea.teaName);
+
+  const coffeeCount = useSelector((state) => state.coffee.coffeeCount);
+  const coffeeName = useSelector((state) => state.coffee.coffeeName);
   const dispatch = useDispatch();
 
   //增加商品
   const addCakeRef = useRef(null);
-  // const addTeaRef = useRef(null);
-  // const addCoffeeRef = useRef(null);
+  const addTeaRef = useRef(null);
+  const addCoffeeRef = useRef(null);
 
   const addCakeOrder = () => {
     const send = {
@@ -31,19 +36,19 @@ export default function DashBoard() {
     dispatch(addCake(send));
   };
 
-  // const addTeaOrder = () => {
-  //   const send = {
-  //     qty: addTeaRef.current.value || 0,
-  //   };
-  //   dispatch(addTea(send));
-  // };
+  const addTeaOrder = () => {
+    const send = {
+      qty: parseInt(addTeaRef.current.value, 10) || 0,
+    };
+    dispatch(addTea(send));
+  };
 
-  // const addCoffeeOrder = () => {
-  //   const send = {
-  //     qty: addCoffeeRef.current.value || 0,
-  //   };
-  //   dispatch(addCoffee(send));
-  // };
+  const addCoffeeOrder = () => {
+    const send = {
+      qty: parseInt(addCoffeeRef.current.value, 10) || 0,
+    };
+    dispatch(addCoffee(send));
+  };
 
   return (
     <Table aria-label="Example static collection table">
@@ -55,7 +60,7 @@ export default function DashBoard() {
       </TableHeader>
       <TableBody>
         <TableRow key="1">
-          <TableCell>蛋糕</TableCell>
+          <TableCell>{cakeName}</TableCell>
           <TableCell>{cakeCount}</TableCell>
           <TableCell>
             <input
@@ -69,38 +74,37 @@ export default function DashBoard() {
             <button onClick={addCakeOrder}>確認</button>
           </TableCell>
         </TableRow>
+        <TableRow key="2">
+          <TableCell>{teaName}</TableCell>
+          <TableCell>{teaCount}</TableCell>
+          <TableCell>
+            <input
+              className="w-10"
+              type="number"
+              placeholder="數量"
+              ref={addTeaRef}
+            />
+          </TableCell>
+          <TableCell>
+            <button onClick={addTeaOrder}>確認</button>
+          </TableCell>
+        </TableRow>
+        <TableRow key="3">
+          <TableCell>{coffeeName}</TableCell>
+          <TableCell>{coffeeCount}</TableCell>
+          <TableCell>
+            <input
+              className="w-10"
+              type="number"
+              placeholder="數量"
+              ref={addCoffeeRef}
+            />
+          </TableCell>
+          <TableCell>
+            <button onClick={addCoffeeOrder}>確認</button>
+          </TableCell>
+        </TableRow>
       </TableBody>
     </Table>
   );
 }
-
-// <TableRow key="2">
-// <TableCell>茶</TableCell>
-// <TableCell>{teaCount}</TableCell>
-// <TableCell>
-//   <input
-//     className="w-10"
-//     type="number"
-//     placeholder="數量"
-//     ref={addTeaRef}
-//   />
-// </TableCell>
-// <TableCell>
-//   <button onClick={addTeaOrder}>確認</button>
-// </TableCell>
-// </TableRow>
-// <TableRow key="3">
-// <TableCell>咖啡</TableCell>
-// <TableCell>{coffeeCount}</TableCell>
-// <TableCell>
-//   <input
-//     className="w-10"
-//     type="number"
-//     placeholder="數量"
-//     ref={addCoffeeRef}
-//   />
-// </TableCell>
-// <TableCell>
-//   <button onClick={addCoffeeOrder}>確認</button>
-// </TableCell>
-// </TableRow>

@@ -6,13 +6,13 @@ const initialState = {
 
 const incartSlice = createSlice({
     name: "incart",
-    initialState: initialState,
+    initialState,
     reducers: {
         addIncart: (state, action) => {
-            const { name, price, count } = action.payload;
+            const { name, count, price } = action.payload;
             const existingProduct = state.inCart.find((product) => product.name === name);
             if (existingProduct) {
-                existingProduct.count++;
+                existingProduct.count = Number(existingProduct.count) + Number(count);
             } else {
                 state.inCart.push({ name: name, count: count, price: price });
             }
@@ -20,9 +20,13 @@ const incartSlice = createSlice({
         delectIncart: (state, action) => {
             const { name } = action.payload;
             state.inCart = state.inCart.filter((product) => product.name !== name);
+        },
+        clearInCart: (state) => {
+            state.inCart = [];
+
         }
     }
 });
 
-export const { addIncart, delectIncart } = incartSlice.actions;
+export const { addIncart, delectIncart, clearInCart } = incartSlice.actions;
 export default incartSlice.reducer;

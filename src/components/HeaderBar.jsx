@@ -27,12 +27,12 @@ export default function HeaderBar() {
       href: "/product",
     },
     {
-      title: "Cart",
-      href: "/cart",
-    },
-    {
       title: "Dashboard",
       href: "/dashboard",
+    },
+    {
+      title: "Cart",
+      href: "/cart",
     },
   ];
   return (
@@ -57,6 +57,11 @@ export default function HeaderBar() {
         <NavbarItem>
           <Link href="/dashboard" aria-current="page">
             Dashborad
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/cart" aria-current="page">
+            Cart
           </Link>
         </NavbarItem>
       </NavbarContent>

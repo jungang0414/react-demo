@@ -2,7 +2,7 @@
 
 狀態管理
 ```
-npm i react-redux @reduxjs/toolkit
+npm i react-redux @reduxjs/toolkit redux-persist
 ```
 
 UI框架
