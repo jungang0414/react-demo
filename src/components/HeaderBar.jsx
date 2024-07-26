@@ -13,8 +13,19 @@ import {
 import { AcmeLogo } from "../AcmeLogo";
 import { useState } from "react";
 
+//firebase
+import { auth } from "../firebase/config";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 export default function HeaderBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  //使用者狀態
+  const [user] = useAuthState(auth);
+
+  const signOut = () => {
+    auth.signOut();
+  };
 
   //側邊欄位設定
   const menuItems = [
@@ -65,16 +76,28 @@ export default function HeaderBar() {
           </Link>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent>
+      {user ? (
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button as={Link} color="primary" onClick={signOut} variant="flat">
+              Sign Out
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      ) : (
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <Button as={Link} color="primary" href="/signin" variant="flat">
+              Sign In
+            </Button>
+          </NavbarItem>
+          <NavbarItem className="hidden lg:flex">
+            <Button as={Link} color="primary" href="/signup" variant="flat">
+              Sign Up
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+      )}
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>

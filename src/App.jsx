@@ -4,6 +4,11 @@ import Cart from "./pages/Cart";
 import Product from "./pages/Product";
 import DashBoard from "./pages/DashBoard";
 import Layout from "./Layout/Layout";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
+
+//firebase
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const router = createBrowserRouter([
   {
@@ -26,9 +31,18 @@ const router = createBrowserRouter([
         path: "/cart",
         element: <Cart />,
       },
+      {
+        path: "/signin",
+        element: <SignIn />,
+      },
+      {
+        path: "/signup",
+        element: <SignUp />,
+      },
     ],
   },
 ]);
+
 function App() {
   return <RouterProvider router={router} />;
 }
