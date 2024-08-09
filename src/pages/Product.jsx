@@ -53,7 +53,7 @@ export default function Product() {
 
   //加入購物車函數
   const addCakeToCart = () => {
-    if (buyCakeQtyRef.current.value === "") {
+    if (!buyCakeQtyRef.current.value || buyCakeQtyRef.current.value <= 0) {
       alert("請輸入數量");
       return;
     }

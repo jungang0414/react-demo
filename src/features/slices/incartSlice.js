@@ -21,12 +21,11 @@ const incartSlice = createSlice({
             const { name } = action.payload;
             state.inCart = state.inCart.filter((product) => product.name !== name);
         },
-        clearInCart: (state) => {
+        clearIncart: (state) => {
             state.inCart = [];
-
         }
     }
 });
 
-export const { addIncart, delectIncart, clearInCart } = incartSlice.actions;
+export const { addIncart, delectIncart, clearIncart } = incartSlice.actions;
 export default incartSlice.reducer;

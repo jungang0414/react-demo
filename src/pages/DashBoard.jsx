@@ -6,7 +6,7 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/table";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addCake } from "../features/slices/cakeSlice";
@@ -54,7 +54,21 @@ export default function DashBoard() {
   };
 
   //使用者登入狀態
-  const [user] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (loading) return;
+    setIsAuthChecked(true);
+  }, [loading]);
+
+  if (!isAuthChecked) {
+    return (
+      <div className="text-center mt-2">
+        <p>加載中...</p>
+      </div>
+    );
+  }
 
   return (
     <>

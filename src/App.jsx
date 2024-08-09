@@ -7,8 +7,8 @@ import Layout from "./Layout/Layout";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 
-//firebase
-import { useAuthState } from "react-firebase-hooks/auth";
+import Employee from "./pages/Employee";
+import TaiwanNew from "./pages/TaiwanNew";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +38,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp />,
+      },
+      {
+        path: "/employee",
+        element: <Employee />,
+      },
+      {
+        path: "/taiwannew",
+        element: <TaiwanNew />,
       },
     ],
   },

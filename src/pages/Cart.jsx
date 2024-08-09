@@ -13,8 +13,9 @@ import { buyCake } from "../features/slices/cakeSlice";
 import { buyTea } from "../features/slices/teaSlice";
 import { buyCoffee } from "../features/slices/coffeeSlice";
 //購物車
-import { delectIncart, clearInCart } from "../features/slices/incartSlice";
+import { delectIncart, clearIncart } from "../features/slices/incartSlice";
 import { useState, useEffect } from "react";
+
 
 export default function Cart() {
   //取出redux的購物車資料
@@ -34,7 +35,7 @@ export default function Cart() {
 
   //結清購物車
   const clearCart = () => {
-    dispatch(clearInCart());
+    dispatch(clearIncart());
   };
 
   //總計算

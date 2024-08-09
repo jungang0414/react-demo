@@ -25,27 +25,37 @@ export default function HeaderBar() {
 
   const signOut = () => {
     auth.signOut();
+    alert("Sign out successfully");
   };
 
   //側邊欄位設定
   const menuItems = [
     {
-      title: "Home",
+      title: "首頁",
       href: "/",
     },
     {
-      title: "Product",
+      title: "商品列表",
       href: "/product",
     },
     {
-      title: "Dashboard",
+      title: "商品後台",
       href: "/dashboard",
     },
     {
-      title: "Cart",
+      title: "串接API",
+      href: "/taiwannew",
+    },
+    {
+      title: "購物車",
       href: "/cart",
     },
+    {
+      title: "資料庫",
+      href: "/employee",
+    }
   ];
+  
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
@@ -54,25 +64,37 @@ export default function HeaderBar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
+          <Link href="/">
+            <AcmeLogo />
+            <p className="font-bold text-inherit">ACME</p>
+          </Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="between">
         <NavbarItem>
           <Link href="/product" aria-current="page">
-            Product
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/dashboard" aria-current="page">
-            Dashborad
+            商品列表
           </Link>
         </NavbarItem>
         <NavbarItem>
           <Link href="/cart" aria-current="page">
-            Cart
+            購物車
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/taiwannew" aria-current="page">
+            串接API
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/dashboard" aria-current="page">
+            商品後台
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/employee" aria-current="page">
+            資料庫
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -80,7 +102,7 @@ export default function HeaderBar() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button as={Link} color="primary" onClick={signOut} variant="flat">
-              Sign Out
+              登出
             </Button>
           </NavbarItem>
         </NavbarContent>
@@ -88,12 +110,7 @@ export default function HeaderBar() {
         <NavbarContent justify="end">
           <NavbarItem>
             <Button as={Link} color="primary" href="/signin" variant="flat">
-              Sign In
-            </Button>
-          </NavbarItem>
-          <NavbarItem className="hidden lg:flex">
-            <Button as={Link} color="primary" href="/signup" variant="flat">
-              Sign Up
+              登入
             </Button>
           </NavbarItem>
         </NavbarContent>
@@ -103,7 +120,7 @@ export default function HeaderBar() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 2
+                index === 4
                   ? "primary"
                   : index === menuItems.length - 1
                   ? "danger"
